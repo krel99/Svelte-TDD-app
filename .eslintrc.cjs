@@ -7,6 +7,9 @@ module.exports = {
 		ecmaVersion: 2020,
 		extraFileExtensions: ['.svelte']
 	},
+	rules: {
+		'no-unused-vars': ['warn'] // Change here to set warnings for unused variables
+	},
 	env: {
 		browser: true,
 		es2017: true,

@@ -8,6 +8,7 @@ export default defineConfig({
 		reporter: 'verbose',
 		environment: 'jsdom',
 		setupFiles: ['src/vitest/cleanupDom.js', './src/vitest/registerMatchers.js'],
-		restoreMocks: true
+		restoreMocks: true,
+		globals: true
 	}
 });

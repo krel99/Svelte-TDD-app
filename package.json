@@ -10,7 +10,7 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"pwtest": "playwright test",
-		"vitest": "vitest"
+		"vitest": "npm run vitest"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
