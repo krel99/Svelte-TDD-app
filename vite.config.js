@@ -5,10 +5,6 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}'],
-		reporter: 'verbose',
-		environment: 'jsdom',
-		setupFiles: ['src/vitest/cleanupDom.js', './src/vitest/registerMatchers.js'],
-		restoreMocks: true,
-		globals: true
+		reporter: 'verbose'
 	}
 });

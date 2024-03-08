@@ -8,7 +8,7 @@ module.exports = {
 		extraFileExtensions: ['.svelte']
 	},
 	rules: {
-		'no-unused-vars': ['warn'] // Change here to set warnings for unused variables
+		'no-unused-vars': 'warn'
 	},
 	env: {
 		browser: true,
