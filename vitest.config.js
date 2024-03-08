@@ -8,6 +8,10 @@ export default defineConfig(({ mode }) => ({
 	},
 	test: {
 		environment: 'happy-dom',
-		setupFiles: ['./tests/setup/vitest-setup.js']
+		setupFiles: ['./tests/setup/vitest-setup.js'],
+		testDir: 'tests/tests-units',
+		include: ['tests/tests-units/**/*.{test,spec}.{js,ts}'],
+		restoreMocks: true,
+		reporter: 'verbose'
 	}
 }));

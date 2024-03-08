@@ -6,7 +6,7 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"test": "npm run test:pw && npm run test:vi",
+		"test": "npm run test:vi && npm run test:pw",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"test:pw": "playwright test",
