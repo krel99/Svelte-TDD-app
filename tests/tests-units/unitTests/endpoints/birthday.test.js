@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
-import Page from '../../../src/routes/birthdays/+page.svelte';
+import Page from '../../../../src/routes/birthdays/+page.svelte';
 
 describe('/birthdays', () => {
 	const birthdays = [

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
-import Birthday from '../../../src/lib/Birthday.svelte';
+import Birthday from '../../../../src/lib/Birthday.svelte';
 
 describe('Birthday Component', () => {
 	const exampleProps = { name: 'Ares', dateOfBirth: '22-22-2222' };
