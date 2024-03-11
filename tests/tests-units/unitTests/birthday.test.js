@@ -1,18 +1,21 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
-import Birthday from '../../../src/lib/Birthday.svelte';
+import Page from '../../../src/routes/birthdays/+page.svelte';
 
-describe('Birthday', () => {
-	const exampleProps = { name: 'Ares', dateOfBirth: '22-22-2222' };
-	it('displays the name of the person', () => {
-		render(Birthday, { ...exampleProps, name: 'Hercules' });
+describe('/birthdays', () => {
+	const birthdays = [
+		{ name: 'Hercules', dob: '1994-02-02' },
+		{ name: 'Athena', dob: '1989-01-01' }
+	];
 
+	it('displays all the birthdays passed to it', () => {
+		render(Page, { data: { birthdays } });
 		expect(screen.queryByText('Hercules')).toBeVisible();
+		expect(screen.queryByText('Athena')).toBeVisible();
 	});
 
-	it('displays the date of birth', () => {
-		render(Birthday, { ...exampleProps, dateOfBirth: '22-22-2022' });
-
-		expect(screen.queryByText('22-22-2022')).toBeVisible();
+	it('displays a form for adding new birthdays', () => {
+		render(Page, { data: { birthdays } });
+		expect(screen.getByRole('form')).toBeVisible();
 	});
 });

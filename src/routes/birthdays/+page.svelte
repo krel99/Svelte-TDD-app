@@ -1,5 +1,6 @@
 <script>
-	import Birthday from '$lib/Birthday.svelte';
+	import Birthday from '../../lib/Birthday.svelte';
+	import Form from '../../lib/Form.svelte';
 
 	export let data;
 	console.log(data);
@@ -15,13 +16,19 @@
 	{/each}
 </ol>
 
+<h1>Add a new birthday</h1>
+<div>
+	<Form></Form>
+</div>
+
 <style>
 	ol {
 		list-style-type: none;
 		padding-left: 0;
 	}
 
-	li {
+	li,
+	div {
 		padding: 10px;
 	}
 </style>
