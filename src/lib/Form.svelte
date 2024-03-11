@@ -19,3 +19,9 @@
 
 	<input type="submit" value="Save" />
 </form>
+
+<style>
+	.error {
+		color: red;
+	}
+</style>

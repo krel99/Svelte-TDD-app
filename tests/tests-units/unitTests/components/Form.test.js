@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
 import Form from '../../../../src/lib/Form.svelte';
 
-describe('Birthday Form', () => {
+describe('birthday form basic functionality', () => {
 	it('displays a form', () => {
 		render(Form);
 		expect(screen.queryByRole('form')).toBeVisible();
@@ -39,7 +39,7 @@ describe('Birthday Form', () => {
 
 	it('date initially has a blank value', () => {
 		render(Form);
-		expect(screen.getByLabelText('Date')).toHaveValue('');
+		expect(screen.getByLabelText('Date of birth')).toHaveValue('');
 	});
 });
 
@@ -50,7 +50,7 @@ describe('form validation errors', () => {
 				error: 'An error'
 			}
 		});
-		expect(screen.queryByText('An Error')).toBeVisible();
+		expect(screen.queryByText('An error')).toBeVisible();
 	});
 
 	it('keeps the previous name value when an error occurs', () => {
@@ -60,7 +60,7 @@ describe('form validation errors', () => {
 				error: 'error message'
 			}
 		});
-		expect(screen.queryByLabelText('Name').toHaveValue('Hercules'));
+		expect(screen.getByLabelText('Name')).toHaveValue('Hercules');
 	});
 
 	it('keeps the previous date of birth value when an error occurs', () => {
@@ -70,6 +70,6 @@ describe('form validation errors', () => {
 				error: 'error message'
 			}
 		});
-		expect(screen.queryByLabelText('Date of birth').toHaveValue('1999-09-09'));
+		expect(screen.getByLabelText('Date of birth')).toHaveValue('1999-09-09');
 	});
 });
