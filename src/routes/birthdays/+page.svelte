@@ -3,7 +3,7 @@
 	import Form from '../../lib/Form.svelte';
 
 	export let data;
-	console.log(data);
+	export let form = undefined;
 </script>
 
 <h1>Birthday list</h1>
@@ -18,7 +18,7 @@
 
 <h1>Add a new birthday</h1>
 <div>
-	<Form></Form>
+	<Form {form}></Form>
 </div>
 
 <style>

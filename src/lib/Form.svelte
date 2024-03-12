@@ -14,7 +14,7 @@
 
 	<label>
 		Date of birth
-		<input type="text" name="date of birth" value={form?.dateOfBirth || ''} />
+		<input type="text" name="dateOfBirth" value={form?.dateOfBirth || ''} />
 	</label>
 
 	<input type="submit" value="Save" />

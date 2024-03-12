@@ -29,7 +29,7 @@ describe('birthday form basic functionality', () => {
 		render(Form);
 		const field = screen.queryByLabelText('Date of birth', { selector: 'input[type=text]' });
 		expect(field).toBeVisible();
-		expect(field.name).toEqual('date of birth');
+		expect(field.name).toEqual('dateOfBirth');
 	});
 
 	it('name initially has a blank value', () => {
