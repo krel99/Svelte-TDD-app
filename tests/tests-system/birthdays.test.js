@@ -20,6 +20,6 @@ test('does not have a birthday if there are validation errors', async ({ page })
 	await page.getByLabel('Date of birth').fill('INVALID');
 	await page.getByRole('button').click();
 	await expect(
-		page.getByText('Please provide a date of birth in the YYYY-MM-DD format.')
+		page.getByText('Please provide a date of birth in the YYYY-MM-DD format')
 	).toBeVisible();
 });
