@@ -1,17 +1,53 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { load, actions } from '../../../../src/routes/birthdays/+page.server.js';
 import { createFormDataRequest } from '../../../../src/lib/factories/formDataRequest';
+import * as birthdayRepository from '../../../../src/lib/server/repository.js';
+import { createBirthday } from '../../../../src/lib/factories/createBirthday.js';
 
 describe('/birthday server', () => {
 	describe('load', () => {
 		it('returns a fixture of two items', () => {
 			const result = load();
 			expect(result.birthdays).toEqual([
-				{ name: 'Hercules', dateOfBirth: '1994-02-02' },
-				{ name: 'Athena', dateOfBirth: '1989-01-01' }
+				expect.objectContaining({ name: 'Hercules', dateOfBirth: '1994-02-02' }),
+				expect.objectContaining({ name: 'Athena', dateOfBirth: '1989-01-01' })
 			]);
 		});
 	});
+
+	describe('/birthdays - default action', () => {
+		beforeEach(birthdayRepository.clear);
+
+		const storedId = () => birthdayRepository.getAll()[0].id;
+
+		const performFormAction = (formData) =>
+			actions.default({
+				request: createFormDataRequest(formData)
+			});
+
+		it('saves unique ids onto each new birthday', async () => {
+			const request = createBirthday('Zeus', '2009-02-02');
+			await performFormAction(request);
+			await performFormAction(request);
+			expect(birthdayRepository.getAll()[0].id).not.toEqual(birthdayRepository.getAll()[1].id);
+		});
+
+		it('updates an entry that shares same id', async () => {
+			await performFormAction(createBirthday('Zeus', '2009-02-02'));
+			await performFormAction(
+				createBirthday('Zeus Ex', '2007-02-02', {
+					id: storedId()
+				})
+			);
+			expect(birthdayRepository.getAll()).toHaveLength(1);
+			expect(birthdayRepository.getAll()).toContainEqual({
+				id: storedId(),
+				name: 'Zeus Ex',
+				dateOfBirth: '2007-02-02'
+			});
+		});
+	});
+
 	describe('server-side validations', () => {
 		describe('when the name is not provided', () => {
 			let result;
@@ -43,7 +79,6 @@ describe('/birthday server', () => {
 			});
 
 			it('returns the date back', () => {
-				console.log(result.data);
 				expect(result.data).toHaveProperty('dateOfBirth', '2024-01-01');
 			});
 		});
