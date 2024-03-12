@@ -41,35 +41,49 @@ describe('birthday form basic functionality', () => {
 		render(Form);
 		expect(screen.getByLabelText('Date of birth')).toHaveValue('');
 	});
-});
 
-describe('form validation errors', () => {
-	it('displays a message', () => {
-		render(Form, {
-			form: {
-				error: 'An error'
-			}
+	describe('id field', () => {
+		it('contains a hidden field for the id if an id is given', () => {
+			render(Form, { form: { id: '123' } });
+			const form = screen.getByRole('form');
+			expect(form.elements.id.value).toEqual('123');
 		});
-		expect(screen.queryByText('An error')).toBeVisible();
+
+		it('does not include the id field if no id is present', () => {
+			render(Form);
+			const form = screen.getByRole('form');
+			expect(form.elements.id).not.toBeDefined();
+		});
 	});
 
-	it('keeps the previous name value when an error occurs', () => {
-		render(Form, {
-			form: {
-				name: 'Hercules',
-				error: 'error message'
-			}
+	describe('form validation errors', () => {
+		it('displays a message', () => {
+			render(Form, {
+				form: {
+					error: 'An error'
+				}
+			});
+			expect(screen.queryByText('An error')).toBeVisible();
 		});
-		expect(screen.getByLabelText('Name')).toHaveValue('Hercules');
-	});
 
-	it('keeps the previous date of birth value when an error occurs', () => {
-		render(Form, {
-			form: {
-				dateOfBirth: '1999-09-09',
-				error: 'error message'
-			}
+		it('keeps the previous name value when an error occurs', () => {
+			render(Form, {
+				form: {
+					name: 'Hercules',
+					error: 'error message'
+				}
+			});
+			expect(screen.getByLabelText('Name')).toHaveValue('Hercules');
 		});
-		expect(screen.getByLabelText('Date of birth')).toHaveValue('1999-09-09');
+
+		it('keeps the previous date of birth value when an error occurs', () => {
+			render(Form, {
+				form: {
+					dateOfBirth: '1999-09-09',
+					error: 'error message'
+				}
+			});
+			expect(screen.getByLabelText('Date of birth')).toHaveValue('1999-09-09');
+		});
 	});
 });

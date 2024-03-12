@@ -31,11 +31,11 @@ test('edits a birthday date', async ({ page }) => {
 	await page.getByRole('button', { name: 'Save' }).click();
 	await page
 		.getByRole('listitem')
-		.filter({ hasText: 'Ares' })
-		.gytByRole('button', { name: 'Edit' })
+		.filter({ hasText: 'Cyclops' })
+		.getByRole('button', { name: 'Edit' })
 		.click();
 	await page.getByLabel('Date of birth').fill('0001-01-01');
-	await page.getByRole('button', { name: 'Edit' }).click();
+	await page.getByRole('button', { name: 'Save' }).click();
 	await expect(page.getByRole('listitem').filter({ hasText: 'Cyclops' })).not.toContainText(
 		'0000-01-01'
 	);

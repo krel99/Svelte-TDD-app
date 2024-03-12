@@ -7,6 +7,10 @@
 {/if}
 
 <form name="birthday" method="post">
+	{#if form?.id}
+		<!-- only if form requires ID; this makes existing tests pass and may need to be edited for optimization -->
+		<input type="hidden" name="id" value={form?.id} />
+	{/if}
 	<label>
 		Name
 		<input type="text" name="name" value={form?.name || ''} />

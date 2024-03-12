@@ -4,6 +4,11 @@ import { createFormDataRequest } from '../../../../src/lib/factories/formDataReq
 import * as birthdayRepository from '../../../../src/lib/server/repository.js';
 import { createBirthday } from '../../../../src/lib/factories/createBirthday.js';
 
+const performFormAction = (formData) =>
+	actions.default({
+		request: createFormDataRequest(formData)
+	});
+
 describe('/birthday server', () => {
 	describe('load', () => {
 		it('returns a fixture of two items', () => {
@@ -19,11 +24,6 @@ describe('/birthday server', () => {
 		beforeEach(birthdayRepository.clear);
 
 		const storedId = () => birthdayRepository.getAll()[0].id;
-
-		const performFormAction = (formData) =>
-			actions.default({
-				request: createFormDataRequest(formData)
-			});
 
 		it('saves unique ids onto each new birthday', async () => {
 			const request = createBirthday('Zeus', '2009-02-02');
@@ -97,7 +97,7 @@ describe('/birthday server', () => {
 				expect(load().birthdays).not.toContainEqual(
 					expect.objectContaining({
 						name: '',
-						dob: '2009-02-02'
+						dateOfBirth: '2009-02-02'
 					})
 				);
 			});
@@ -113,6 +113,32 @@ describe('/birthday server', () => {
 
 			it('returns the name back', () => {
 				expect(result.data).toHaveProperty('name', 'Troll');
+			});
+		});
+		describe('when replacing an item', () => {
+			beforeEach(async () => {
+				await performFormAction(createBirthday('Hercules', '2009-01-02'));
+			});
+			const storedId = () => birthdayRepository.getAll()[0].id;
+
+			it('returns the id when an empty name is provided', async () => {
+				const result = await performFormAction(
+					createBirthday('', '1982-05-01', {
+						id: storedId()
+					})
+				);
+
+				expect(result.data).toHaveProperty('id', storedId());
+			});
+
+			it('returns the id when an empty date of birth is provided', async () => {
+				const result = await performFormAction(
+					createBirthday('Hercules', '', {
+						id: storedId()
+					})
+				);
+
+				expect(result.data).toHaveProperty('id', storedId());
 			});
 		});
 	});
