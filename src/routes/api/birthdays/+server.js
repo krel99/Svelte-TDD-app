@@ -12,10 +12,10 @@ export const POST = async ({ request }) => {
 
 export const GET = () => json({ birthdays: getAll() });
 
-export const PUT = async ({ request }) => {
-	const { name, dateOfBirth, id } = await request.json();
-	const result = replace(id, { name, dateOfBirth });
+// export const PUT = async ({ request }) => {
+// 	const { name, dateOfBirth, id } = await request.json();
+// 	const result = replace(id, { name, dateOfBirth });
 
-	if (result.error) throw error(422, result.error);
-	return json(result);
-};
+// 	if (result.error) throw error(422, result.error);
+// 	return json(result);
+// };

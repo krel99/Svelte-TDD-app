@@ -7,9 +7,9 @@ export class BirthdayListPage {
 		await this.page.goto('/birthdays');
 	}
 
-	async saveNameAndDateOfBirth(name, dob) {
+	async saveNameAndDateOfBirth(name, dateOfBirth) {
 		await this.nameField().fill(name);
-		await this.dateOfBirthField().fill(dob);
+		await this.dateOfBirthField().fill(dateOfBirth);
 		await this.saveButton().click();
 	}
 
